@@ -11,13 +11,19 @@
 
 <body>
     <div class="container mt-5">
+        @session('status')
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endsession
         <h2 class="text-center mb-4">Upload an Image</h2>
 
         <!-- Image Upload Form -->
-        <form action="" method="POST" enctype="multipart/form-data" class="mb-5">
+        <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data" class="mb-5">
+            @csrf
             <div class="row g-2 align-items-center">
                 <div class="col-md-10">
-                    <input type="file" name="image" class="form-control" required>
+                    <input type="file" name="image" id="image" class="form-control" required>
                 </div>
                 <div class="col-md-2">
                     <button type="submit" class="btn btn-primary w-100">Upload Image</button>
@@ -35,10 +41,14 @@
             </thead>
             <tbody>
                 <!-- Example row; replace with dynamic data -->
-                <tr>
-                    <th scope="row">1</th>
-                    <td><img src="https://picsum.photos/200" alt="Image" class="img-thumbnail" width="100"></td>
-                </tr>
+                @foreach ($images as $image)
+                    <tr>
+                        <th scope="row">{{ $image->id }}</th>
+                        <td><img src="{{ asset($image->filepath) }}" alt="Image" class="img-thumbnail"
+                                width="100">
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
