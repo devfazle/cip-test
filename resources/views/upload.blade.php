@@ -16,6 +16,11 @@
                 {{ session('status') }}
             </div>
         @endsession
+        @error('image')
+            <div class="alert alert-danger">
+                {{ $message }}
+            </div>
+        @enderror
         <h2 class="text-center mb-4">Upload an Image</h2>
 
         <!-- Image Upload Form -->
