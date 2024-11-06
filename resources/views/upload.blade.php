@@ -41,14 +41,19 @@
             </thead>
             <tbody>
                 <!-- Example row; replace with dynamic data -->
-                @foreach ($images as $image)
+                @if ($images->isNotEmpty())
+                    @foreach ($images as $image)
+                        <tr>
+                            <th scope="row">{{ $image->id }}</th>
+                            <td><img src="{{ asset($image->filepath) }}" alt="Image" class="img-thumbnail"
+                                    width="100"></td>
+                        </tr>
+                    @endforeach
+                @else
                     <tr>
-                        <th scope="row">{{ $image->id }}</th>
-                        <td><img src="{{ asset($image->filepath) }}" alt="Image" class="img-thumbnail"
-                                width="100">
-                        </td>
+                        <td colspan="2">No Image Found.</td>
                     </tr>
-                @endforeach
+                @endif
             </tbody>
         </table>
     </div>
